@@ -4,14 +4,26 @@ from math import cos, sin, atan, sqrt, pi
 import random
 
 shots = [
-    (6.3, 8),
-    (5.7, 85),
-    (7.6, 30),
-    (9.1, 355),
-    (7.6, 280),
-    (8.3, 270),
-    (8.4, 250),
-    (9.2, 105),
+    (8.1, 15),
+    (9.5, 5),
+    (9.6, 25),
+    (9.4, 65),
+    (9.2, 280),
+    (9.8, 280),
+    (9.4, 95),
+    (10.4, 240),
+    (10.6, 270),
+    (10.8, 30),
+    (10.7, 70),
+    (9.7, 185),
+    (9.9, 175),
+    (9.6, 180),
+    (9.3, 170),
+    (8.8, 150),
+    (8.7, 180),
+    (8.6, 200),
+    (7.9, 225),
+    (7.1, 170),
 ]
 
 # Decrease all radii by 1
@@ -43,7 +55,7 @@ x = [r * cos(a * pi / 180) for (r, a) in shots]
 y = [r * sin(a * pi / 180) for (r, a) in shots]
 mean_x = sum(x) / len(x)
 mean_y = sum(y) / len(y)
-mean_radius = 10 - sqrt(mean_x**2 + mean_y**2)
+mean_radius = sqrt(mean_x**2 + mean_y**2)
 mean_hit_angle = atan(mean_y / mean_x) * (180 / pi)
 
 
@@ -163,7 +175,7 @@ layout_average = {
     "margin": {"l": 0, "r": 0, "t": 0, "b": 0},
 }
 
-marker = {"color": "red", "size": 15}
+marker = {"color": "red", "size": 10}
 
 marker_average = {"color": "green", "size": 10}
 
@@ -175,10 +187,10 @@ page = """
 <|layout|columns=1 1|
 <|part|class_name=card mt1|
 ## Session
-- **15 m**{: .color-primary} **Distance** ( 16.4 yds )
-- **Glock 19X**
+- **10 m**{: .color-primary} **Distance** ( 10.9 yds )
+- **Glock 19**
 - **9x19mm**
-- 8 Single Shots
+- 20 Shots ( No Time Constraint )
 - 25 cm Target Radius ( 9.8 in )
 |>
 
