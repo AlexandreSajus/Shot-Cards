@@ -50,13 +50,22 @@ mean_hit_radius = sum([(10 - x) * 0.025 for x in radiuses]) / len(radiuses)
 accuracy_radians = atan(mean_hit_radius / shooting_distance)
 accuracy_moa = accuracy_radians * (180 / pi) * 60
 
-# Calculate the mean angle
-x = [r * cos(a * pi / 180) for (r, a) in shots]
-y = [r * sin(a * pi / 180) for (r, a) in shots]
-mean_x = sum(x) / len(x)
-mean_y = sum(y) / len(y)
-mean_radius = sqrt(mean_x**2 + mean_y**2)
-mean_hit_angle = atan(mean_y / mean_x) * (180 / pi)
+distances_to_center = [10 - x for x in radiuses]
+angles_to_center = [x * pi / 180 for x in angles]
+
+x_coords = [r * cos(a) for (r, a) in zip(distances_to_center, angles_to_center)]
+y_coords = [r * sin(a) for (r, a) in zip(distances_to_center, angles_to_center)]
+
+mean_x = sum(x_coords) / len(x_coords)
+mean_y = sum(y_coords) / len(y_coords)
+
+mean_hit_angle = atan(mean_y / mean_x)
+mean_hit_angle = mean_hit_angle * (180 / pi)
+if mean_x < 0:
+    mean_hit_angle += 180
+if mean_x > 0 and mean_y < 0:
+    mean_hit_angle += 360
+mean_radius = 10 - sqrt(mean_x**2 + mean_y**2)
 
 
 def scattering_distance(shots: list) -> float:
